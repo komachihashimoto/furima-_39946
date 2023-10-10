@@ -67,7 +67,7 @@ Things you may want to cover:
 | ------------- | ---------- | ----------- |
 | zip_code      | integer    | null: false |
 | prefectures   | string     | null: false |
-| ctiy          | string     | null: false |
+| city          | string     | null: false |
 | address_line1 | text       | null: false |
 | address_line2 | text       |             |
 | tel           | integer    | null: false |
