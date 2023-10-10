@@ -36,7 +36,7 @@ Things you may want to cover:
 
 ### Association
  - has_many :items
- - has_meny :addresses
+ - has_many :addresses
  - has_many :orders
 
 
