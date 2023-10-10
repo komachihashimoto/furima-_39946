@@ -78,7 +78,7 @@ Things you may want to cover:
 
 
 ### Association
- - has_many :buy_histories
+ - belongs_to :buy_history
 
 
 
