@@ -25,12 +25,12 @@ Things you may want to cover:
 
 ## users
 
-| Column   | Type   | Options                   |
-| -------- | ------ | ------------------------- |
-| name     | string | null: false               |
-| email    | string | null: false, unique: true |
-| password | string | null: false               |
-| dob      | date   | null: false               |
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ------------------------- |
+| name               | string | null: false               |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
+| dob                | date   | null: false               |
 
 
 
@@ -42,17 +42,16 @@ Things you may want to cover:
 
 ## items
 
-| Column       | Type       | Options     |
-| ------------ | ---------- | ----------- |
-| name         | string     | null: false |
-| image        | string     | null: false |
-| text         | text       | null: false |
-| category     | integer    | null: false |
-| condition    | integer    | null: false |
-| deliverycost | integer    | null: false |
-| price        | integer    | null: false |
-| address_id   | references | null: false |
-| user_id      | references | null: false |
+| Column           | Type       | Options     |
+| ---------------- | ---------- | ----------- |
+| name             | string     | null: false |
+| information      | text       | null: false |
+| category_id      | integer    | null: false |
+| condition_id     | integer    | null: false |
+| delivery_cost_id | integer    | null: false |
+| price_id         | integer    | null: false |
+| address_id       | references | null: false |
+| user             | references | null: false |
 
 
 
@@ -64,30 +63,31 @@ Things you may want to cover:
 
 ## addresses
 
-| Column  | Type       | Options     |
-| ------- | ---------- | ----------- |
-| address | string     | null: false |
-| user_id | references | null: false |
+| Column        | Type       | Options     |
+| ------------- | ---------- | ----------- |
+| zip_code      | integer    | null: false |
+| prefectures   | string     | null: false |
+| ctiy          | string     | null: false |
+| address_line1 | text       | null: false |
+| address_line2 | text       |             |
+| tel           | integer    | null: false |
+| user          | references | null: false |
 
 
 ### Association
- - has_many :orders
  - has_many :items
  - belongs_to :users
 
 
 
- ## orders
+ ## buy_history
 
-| Column     | Type       | Options     |
-| ---------- | ---------- | ----------- |
-| text       | text       | null: false |
-| user_id    | references | null: false |
-| address_id | references | null: false |
-| items_id   | references | null: false |
+| Column | Type       | Options     |
+| ------ | ---------- | ----------- |
+| user   | references | null: false |
+| items  | references | null: false |
 
 
 ### Association
  - belongs_to :users
- - belongs_to :addresses
  - belongs_to :items
