@@ -60,7 +60,7 @@ Things you may want to cover:
 
 
 ### Association
- - has_one :order
+ - has_one :buy_history
  - belongs_to :user
 
 
