@@ -35,14 +35,10 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    if user_signed_in?
-      if current_user == @item.user
-        @item.destroy
-        redirect_to "/"
-      else
-        redirect_to "/"
-      end
-    else
+    if current_user == @item.user
+      @item.destroy
+      redirect_to "/"
+     else
       redirect_to "/"
     end
   end
