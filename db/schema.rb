@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_16_081050) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_17_075025) do
   create_table "active_storage_attachments", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -37,6 +37,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_16_081050) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "addresses", charset: "utf8", force: :cascade do |t|
+    t.string "zip_code", default: "", null: false
+    t.integer "prefecture_id", null: false
+    t.string "city", default: "", null: false
+    t.string "address_line1", default: "", null: false
+    t.string "address_line2", default: ""
+    t.string "tel", default: "", null: false
+    t.bigint "buy_history_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["buy_history_id"], name: "index_addresses_on_buy_history_id"
   end
 
   create_table "buy_histories", charset: "utf8", force: :cascade do |t|
@@ -83,6 +96,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_16_081050) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "addresses", "buy_histories"
   add_foreign_key "buy_histories", "items"
   add_foreign_key "buy_histories", "users"
   add_foreign_key "items", "users"

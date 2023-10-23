@@ -1,12 +1,13 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
-  #has_one :buy_history
+  has_one :buy_history
   belongs_to :user
   belongs_to :category
   belongs_to :condition
   belongs_to :delivery_cost
   belongs_to :prefecture
   belongs_to :shipping_date
+  has_one :buy_history
   has_one_attached :image
 
   validates :image, :name, :information, :price, presence: true
