@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.describe BuyHistoryAddress, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
   before do
-    @buy_history_address = FactoryBot.build(:buy_history_address)
+    item = FactoryBot.create(:item)
+    user = FactoryBot.create(:user)
+    @buy_history_address = FactoryBot.build(:buy_history_address, user_id: user.id, item_id: item.id)
   end
 
   describe '商品の購入' do
@@ -11,8 +13,11 @@ RSpec.describe BuyHistoryAddress, type: :model do
       it 'zip_codeとprefecture_idとcityとaddressline1とtelとtokenとuser_idとitem_idが存在すれば購入できる' do
         expect(@buy_history_address).to be_valid
       end
+      it 'address_line2がなくても登録できること' do
+      @buy_history_address.address_line2 = ''
+        expect(@buy_history_address).to be_valid
+      end
     end
-  end
 
   context '購入できないとき' do
     it 'zip_codeが空では出品できない'do
@@ -45,8 +50,18 @@ RSpec.describe BuyHistoryAddress, type: :model do
       @buy_history_address.valid?
       expect(@buy_history_address.errors.full_messages).to include("Tel can't be blank")
     end
-    it 'telが10~11桁以内の半角数字以外は出品できない'do
+    it 'telが9桁以下では出品できない'do
     @buy_history_address.tel = '123456'
+      @buy_history_address.valid?
+      expect(@buy_history_address.errors.full_messages).to include("Tel is invalid")
+    end
+    it 'telが12桁以上では出品できない'do
+    @buy_history_address.tel = '123456789012'
+      @buy_history_address.valid?
+      expect(@buy_history_address.errors.full_messages).to include("Tel is invalid")
+    end
+    it 'telに半角数字以外が含まれている場合は出品できない'do
+    @buy_history_address.tel = '１234567890'
       @buy_history_address.valid?
       expect(@buy_history_address.errors.full_messages).to include("Tel is invalid")
     end
@@ -65,5 +80,6 @@ RSpec.describe BuyHistoryAddress, type: :model do
       @buy_history_address.valid?
       expect(@buy_history_address.errors.full_messages).to include("Item can't be blank")
     end
+   end
   end
 end
