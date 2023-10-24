@@ -1,0 +1,2 @@
+module BuyHistoryHelper
+end
