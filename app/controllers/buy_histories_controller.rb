@@ -1,7 +1,8 @@
 class BuyHistoriesController < ApplicationController
   before_action :authenticate_user!, except: :index
+  before_action :call, only: [:new, :create, :redirect_to_root_path]
   before_action :redirect_to_root_path, only: [:new, :create]
-  before_action :call, only: [:new, :create]
+
   
   def index
   end
@@ -42,7 +43,6 @@ class BuyHistoriesController < ApplicationController
   end
 
   def redirect_to_root_path
-    @item = Item.find(params[:item_id])
     if @item.buy_history.present? || @item.user == current_user
       redirect_to root_path
     end
