@@ -44,7 +44,7 @@ class BuyHistoriesController < ApplicationController
 
   def redirect_to_root_path
     @item = Item.find(params[:item_id])
-    if @item.buy_history.present? || user_session == current_user
+    if @item.buy_history.present? || @item.user == current_user
       redirect_to root_path
     end
   end
