@@ -75,7 +75,6 @@ group :test do
 end
 
 group :development do
-  gem 'rubocop', require: false
   gem 'capistrano'
   gem 'capistrano-rbenv'
   gem 'capistrano-bundler'
